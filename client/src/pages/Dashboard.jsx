@@ -25,9 +25,9 @@ const Dashboard = () => {
       </div>
 
       {/* profile .... */}
-      <div>
+  
         {tab === 'profile' && <DashProfile />}
-      </div>
+      
     </div>
   )
 }
