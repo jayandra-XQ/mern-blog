@@ -3,6 +3,7 @@ import { Alert, Button, Modal, TextInput } from 'flowbite-react'
 import { useEffect, useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
+import {Link} from 'react-router-dom'
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -154,13 +155,13 @@ const DashProfile = () => {
   }
 
 
-  const handleSignout = async() => {
+  const handleSignout = async () => {
     try {
-      const res = await fetch ('/api/user/signout', {
+      const res = await fetch('/api/user/signout', {
         method: 'POST'
       });
       const data = await res.json();
-      if(!res.ok) {
+      if (!res.ok) {
         console.log(data.message)
       } else {
         dispatch(signoutSuccess())
@@ -218,11 +219,28 @@ const DashProfile = () => {
         <Button type='submit' gradientDuoTone='purpleToBlue' outline>
           Update
         </Button>
+
+        {
+          <Button>
+            currentUser.isAdmin && (
+            <Link to={'/create-post'}>
+              <Button
+                type='button'
+                gradientDuoTone='purpleToPink'
+                className='w-full'
+              >
+                Create a post
+              </Button>
+
+            </Link>
+            )
+          </Button>
+        }
       </form>
 
       <div className='text-red-500 flex justify-between mt-5' >
         <span className='cursor-pointer' onClick={() => setShowModal(true)}>Delete Account</span>
-        <span  onClick={handleSignout} className='cursor-pointer'>Sign Out</span>
+        <span onClick={handleSignout} className='cursor-pointer'>Sign Out</span>
 
       </div>
 
