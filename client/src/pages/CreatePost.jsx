@@ -5,7 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/style.css'
+import 'react-circular-progressbar/dist/styles.css';
 import {useNavigate} from 'react-router-dom'
 
 

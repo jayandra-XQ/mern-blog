@@ -13,7 +13,7 @@ const DashSidebar = () => {
 
   const dispatch = useDispatch()
 
-  const {currentUser} = useSelector(state => state.user)
+  const {currentUser} = useSelector((state) => state.user)
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)

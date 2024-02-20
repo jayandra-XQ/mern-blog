@@ -221,7 +221,7 @@ const DashProfile = () => {
         </Button>
 
         {
-          <Button>
+         
             currentUser.isAdmin && (
             <Link to={'/create-post'}>
               <Button
@@ -234,7 +234,6 @@ const DashProfile = () => {
 
             </Link>
             )
-          </Button>
         }
       </form>
 
