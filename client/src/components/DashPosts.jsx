@@ -8,7 +8,9 @@ const DashPosts = () => {
   const { currentUser } = useSelector((state) => state.user)
   const [userPosts, setUserPosts] = useState([])
 
-  console.log(userPosts)
+  const [showMore, setShowMore] = useState(true)
+
+ 
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,7 +19,11 @@ const DashPosts = () => {
         const data = await res.json()
 
         if (res.ok) {
-          setUserPosts(data.posts)
+          setUserPosts(data.posts);
+
+          if(data.posts.length < 9) {
+            setShowMore(false)
+          }
         }
       } catch (error) {
 
@@ -27,7 +33,25 @@ const DashPosts = () => {
     if (currentUser.isAdmin) {
       fetchPosts()
     }
-  }, [currentUser._id])
+  }, [currentUser._id]);
+
+  const handleShowMore = async () => {
+    const startIndex = userPosts.length;
+
+    try {
+      const res = await fetch (`api/poost/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
+      const data = await res.json();
+
+      if(res.ok) {
+        setUserPosts((prev) => [...prev, ...data.posts]);
+        if(data.posts.length < 9) {
+          setShowMore(false)
+        }
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
 
   return (
@@ -66,7 +90,7 @@ const DashPosts = () => {
                       </Table.Cell>
 
                       <Table.Cell>
-                        <Link className='font-medium text-gray-900 dark:text-white'  to={`/post/${post.slug}`}>{post.title}</Link>
+                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${post.slug}`}>{post.title}</Link>
                       </Table.Cell>
 
                       <Table.Cell>
@@ -80,7 +104,7 @@ const DashPosts = () => {
                       </Table.Cell>
 
                       <Table.Cell>
-                        <Link  className='text-teal-500 hover:underline'  to={`/update-post/${post._id}`}>
+                        <Link className='text-teal-500 hover:underline' to={`/update-post/${post._id}`}>
                           <span>Edit</span>
                         </Link>
                       </Table.Cell>
@@ -89,6 +113,16 @@ const DashPosts = () => {
                 ))
               }
             </Table>
+
+            {
+              showMore && (
+
+                <button onClick={handleShowMore} className='w-full text-teal-500 self-center text-sm py-7'>
+                  Show more
+                </button>
+              )
+              }
+            
           </>
         ) : (
           <p>You have no posts yet</p>
