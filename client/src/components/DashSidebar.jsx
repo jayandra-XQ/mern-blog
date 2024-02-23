@@ -70,7 +70,7 @@ const DashSidebar = () => {
                   Posts
                 </Sidebar.Item>
               </Link>
-            )};
+            )}
 
           {currentUser.isAdmin && (
             <Link to='/dashboard?tab=users'>

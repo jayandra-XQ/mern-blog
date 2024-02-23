@@ -33,7 +33,8 @@ export default function PostPage() {
         setError(true)
         setLoading(false)
       }
-    }
+    };
+    fetchPost();
   }, [postSlug]);
 
 
