@@ -104,6 +104,8 @@ const CreatePost = () => {
             <option value="javascript">Javascript</option>
             <option value="reactjs">React.js</option>
             <option value="expressjs">Express.js</option>
+            <option value="mongodb">Mongodb</option>
+
           </Select>
         </div>
 
