@@ -1,4 +1,6 @@
 📝 MERN Stack Blog Web App
+
+
 A feature-rich, responsive blog web application built with the MERN Stack (MongoDB, Express, React, Node.js). This app includes robust authentication, advanced search functionality,
 and an admin dashboard, providing a seamless and interactive experience across all devices.
 
